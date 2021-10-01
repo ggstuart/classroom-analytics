@@ -14,11 +14,15 @@ class Commit:
         return self._data[name]
 
     def __str__(self):
-        return f'Commit({self.sha}, {self.commit["author"]["date"]})'
+        return f'Commit({self.sha}, {self.datetime})'
+
+    @property
+    def datetime(self):
+        return datetime.strptime(self.commit["author"]["date"], fmt)
 
     @property
     def date(self):
-        return datetime.strptime(self.commit["author"]["date"], fmt).date()
+        return self.datetime.date()
 
     @property
     def week(self):
