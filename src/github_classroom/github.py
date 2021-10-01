@@ -1,4 +1,6 @@
 """
+DEPRECATED: Use organisation.Organisation and related classes
+
 Get all the private repositories from an organisation using the github API
 Filter the repository based on the name 
 (in this case all repos are of the form 'assignment-[username]')
