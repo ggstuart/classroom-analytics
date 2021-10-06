@@ -20,11 +20,13 @@ class Organisation:
 
     def __init__(self, organisation_name, username, token):
         self.auth = (username, token)
+        self.name = organisation_name
         self.url = f"{base_url}/orgs/{organisation_name}"
         self._data = self._load()
 
     def _load(self):
         response = requests.get(self.url, auth=self.auth)
+        assert response.status_code == 200
         return response.json()
 
     def __getattr__(self, name):
@@ -61,3 +63,11 @@ class Organisation:
         for repo in self.repos(**kwargs):
             if repo.name.split('-')[0] == name:
                 yield repo
+
+    def repo(self, name):
+        url = f"{base_url}/repos/{self.name}/{name}"
+        response = requests.get(
+            url, 
+            auth=self.auth 
+        )
+        return Repository(response.json(), self.auth)
