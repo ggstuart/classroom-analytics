@@ -17,14 +17,14 @@ weeks = get_weeks(start, 23)
 defaults = {week : 0 for week in weeks}
 
 with output_path.open('w') as f:
-    writer = csv.DictWriter(f, fieldnames=['identifier', 'github_name', *weeks], extrasaction='ignore')
+    writer = csv.DictWriter(f, fieldnames=['identifier', 'github_username', *weeks], extrasaction='ignore')
     writer.writeheader()
 
-    for identifier, github_name, repo in assignment.roster():
+    for identifier, github_username, repo in assignment.roster():
         print(identifier)
         row = defaults.copy()
         row['identifier'] = identifier
-        row['github_name'] = github_name
+        row['github_username'] = github_username
         if repo:
             row.update(dict(repo.commit_count_by_week()))
         writer.writerow(row)

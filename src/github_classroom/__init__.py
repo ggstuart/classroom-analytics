@@ -1,10 +1,4 @@
-from datetime import datetime, timedelta
-
-from .github import GithubOrganisation
-from .student_repo import StudentRepo
-
-__all__ = [StudentRepo, GithubOrganisation]
-
+from datetime import timedelta
 
 def get_weeks(start, n_weeks):
     one_week = timedelta(days=7)
