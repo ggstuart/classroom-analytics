@@ -1,7 +1,6 @@
 import csv
 from pathlib import Path
 from datetime import datetime
-import itertools
 
 # from github_classroom import get_weeks
 from github_classroom.config import assignment_from_config
