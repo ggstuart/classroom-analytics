@@ -25,6 +25,11 @@ class Repository:
             d['commits_url'] = self.commits_url[:-6]
             yield Branch(d, self.auth)
 
+    @property
+    def authenticated_clone_url(self):
+        return f"//{self.auth[0]}:{self.auth[1]}@".join(self.clone_url.split('//'))
+
+
     def all_commits_by_week(self):
         result = set()
         for branch in self.branches():

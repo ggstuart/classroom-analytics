@@ -1,6 +1,6 @@
 from github_classroom.config import assignment_from_config
 
-assignment = assignment_from_config('simon.ini')
+assignment = assignment_from_config('config.ini')
 
 for identifier, github_username, repo in assignment.roster():
     if repo:

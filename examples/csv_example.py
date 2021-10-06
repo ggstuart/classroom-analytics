@@ -9,8 +9,9 @@ from github_classroom import get_weeks
 # setup some configuration
 output_path = Path('weekly_commits.csv')
 
-assignment = assignment_from_config('simon.ini')
+assignment = assignment_from_config('config.ini')
 
+# We are fixing the range of dates in this example
 start = datetime(2021, 10, 4).date()
 weeks = get_weeks(start, 23)
 
