@@ -17,7 +17,7 @@ weeks = get_weeks(start, 23)
 
 defaults = {week : 0 for week in weeks}
 
-with output_path.open('w') as f:
+with output_path.open('w', newline='') as f:
     writer = csv.DictWriter(f, fieldnames=['identifier', 'github_username', *weeks], extrasaction='ignore')
     writer.writeheader()
 
