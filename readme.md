@@ -66,4 +66,7 @@ Clone the git repository, set up a virtual environment as required and run this 
 pip install --editable .
 ```
 
+The `--editable` flag allows for further updates to be pulled in by git.
+This will be necessary whilst we are in the very early stages of development.
+
 >Note the full stop in the above command, the command should be run in the directory where the code was cloned.
