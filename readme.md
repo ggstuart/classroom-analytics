@@ -58,6 +58,8 @@ assignment_prefix = myassignment
 roster_filename = classroom_roster.csv
 ```
 
+>Note that the roster file itself will need to be updated regularly to bring in new github_usernames as students accept the assignment.
+
 ## Installation
 
 Clone the git repository, set up a virtual environment as required and run this to install the `github_classroom` library. 
