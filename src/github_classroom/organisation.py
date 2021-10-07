@@ -1,8 +1,4 @@
-import logging
 import requests
-from requests.utils import quote
-from datetime import datetime, timedelta
-from collections import Counter
 
 from .repository import Repository
 
