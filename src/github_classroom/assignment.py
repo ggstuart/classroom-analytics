@@ -8,14 +8,25 @@ class Assignment:
         self.prefix = prefix
         self.organisation = organisation
 
-    def roster(self):
+
+    def _repo(self, github_username):
+        repo_name = f"{self.prefix}-{github_username}"
+        return self.organisation.repo(repo_name)
+
+
+    def roster_file(self):
+        """yield each row of the roster file"""
         with self.roster_path.open('r') as f:
             reader = csv.DictReader(f)
             for row in reader:
-                student = row['identifier']
-                github_username = row['github_username']
-                if github_username:
-                    repo_name = f"{self.prefix}-{github_username}"
-                    yield student, github_username, self.organisation.repo(repo_name)
-                else:
-                    yield student, github_username, None
+                yield row
+
+    def roster(self):
+        for student in self.roster_file():
+            identifier = student['identifier']
+            github_username = student['github_username']
+            if github_username:
+                yield identifier, github_username, self._repo(github_username)
+            else:
+                yield identifier, github_username, None
+
