@@ -1,6 +1,8 @@
 import csv
 from pathlib import Path
 
+from .exceptions import MissingRepo
+
 class Assignment:
     """Represents a classroom assignment"""
     def __init__(self, organisation, roster_filename, prefix):
@@ -26,7 +28,12 @@ class Assignment:
             identifier = student['identifier']
             github_username = student['github_username']
             if github_username:
-                yield identifier, github_username, self._repo(github_username)
+                try:
+                    repo = self._repo(github_username)
+                except MissingRepo as e:
+                    print(e)
+                    repo = None
+                yield identifier, github_username, repo
             else:
                 yield identifier, github_username, None
 

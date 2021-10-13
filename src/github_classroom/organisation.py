@@ -1,6 +1,7 @@
 import requests
 
 from .repository import Repository
+from .exceptions import GithubException, MissingRepo
 
 base_url = "https://api.github.com"
 
@@ -22,8 +23,10 @@ class Organisation:
 
     def _load(self):
         response = requests.get(self.url, auth=self.auth)
-        assert response.status_code == 200
-        return response.json()
+        if response.status_code == 200:
+            return response.json()
+        else:
+            raise GithubException(response.json()['message'])
 
     def __getattr__(self, name):
         return self._data[name]
@@ -66,4 +69,7 @@ class Organisation:
             url, 
             auth=self.auth 
         )
-        return Repository(response.json(), self.auth)
+        if response.status_code == 200:
+            return Repository(response.json(), self.auth)
+        else:
+            raise MissingRepo(response.url, response.json())
