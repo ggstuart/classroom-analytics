@@ -37,3 +37,5 @@ class Assignment:
             else:
                 yield identifier, github_username, None
 
+    def __str__(self):
+        return f'Assignment({self.organisation.url}/{self.prefix}-[username])'
