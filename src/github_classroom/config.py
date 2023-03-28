@@ -3,6 +3,33 @@ from configparser import ConfigParser
 from .organisation import Organisation
 from .assignment import Assignment
 
+class Config:
+    def __init__(self, filename):
+        self.conf = ConfigParser()
+        self.conf.read(filename)
+
+    def __getattr__(self, name):
+        return dict(self.conf.items(name))
+
+    def organisation(self):
+        github = self.github
+        return Organisation(
+            github['organisation'], 
+            github['username'], 
+            github['token']
+        )
+
+    def assignment(self):
+        org = self.organisation()
+        classroom = self.classroom
+        return Assignment(
+            org, 
+            classroom['roster_filename'], 
+            classroom['assignment_prefix']
+        )
+
+
+
 def config_from_filename(filename):
     conf = ConfigParser()
     conf.read(filename)
